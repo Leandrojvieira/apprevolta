@@ -2,6 +2,7 @@ import makeWASocket, {
   useMultiFileAuthState,
   DisconnectReason
 } from '@whiskeysockets/baileys'
+import pino from 'pino'
 import { logger } from '../utils/logger.js'
 import { ReconnectionManager } from '../utils/reconnection-manager.js'
 import { config } from '../config/environment.js'
@@ -31,7 +32,7 @@ export async function initWhatsApp() {
     sock = makeWASocket({
       auth: state,
       printQRInTerminal: false,
-      logger: { level: 'silent' }
+      logger: pino({ level: 'silent' })
     })
 
     sock.ev.on('creds.update', saveCreds)
