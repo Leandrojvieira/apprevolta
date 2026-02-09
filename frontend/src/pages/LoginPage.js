@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 export default function LoginPage() {
-  const { login } = useAuth()
+  const { login, register } = useAuth()
   const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(true)
   const [formData, setFormData] = useState({
@@ -20,7 +20,9 @@ export default function LoginPage() {
     setLoading(true)
 
     try {
-      const result = await login(formData.email, formData.password)
+      const result = isLogin 
+        ? await login(formData.email, formData.password)
+        : await register(formData.email, formData.password, formData.name)
       
       if (result.success) {
         navigate('/whatsapp')
