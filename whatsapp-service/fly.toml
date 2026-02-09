@@ -1,0 +1,23 @@
+# fly.toml app configuration file generated for revolta-whatsapp-services on 2026-02-06T18:04:54-03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "revolta-whatsapp-service"
+
+primary_region = "gru"
+
+[env]
+  PORT = "3001"
+
+[http_service]
+  internal_port = 3001
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+[mounts]
+  source = "whatsapp_data"
+  destination = "/app/data"
