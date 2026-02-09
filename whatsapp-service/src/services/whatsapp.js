@@ -1,7 +1,6 @@
 import makeWASocket, {
   useMultiFileAuthState,
-  DisconnectReason,
-  fetchLatestBaileyVersion
+  DisconnectReason
 } from '@whiskeysockets/baileys'
 import { logger } from '../utils/logger.js'
 import { ReconnectionManager } from '../utils/reconnection-manager.js'
@@ -25,15 +24,11 @@ export async function initWhatsApp() {
     logger.info({ service: 'whatsapp', event: 'initialization_start' }, 'Iniciando WhatsApp...')
     
     initReconnectionManager()
-    
-    const { version } = await fetchLatestBaileyVersion()
-    logger.info({ service: 'whatsapp', baileys_version: version }, 'Versão do Baileys obtida')
 
     const { state, saveCreds } = await useMultiFileAuthState(config.whatsapp.authPath)
     logger.info({ service: 'whatsapp', auth_path: config.whatsapp.authPath }, 'Estado de autenticação carregado')
 
     sock = makeWASocket({
-      version,
       auth: state,
       printQRInTerminal: false,
       logger: { level: 'silent' }
