@@ -65,7 +65,7 @@
    fly deploy --no-cache
    
    # Configurar secrets
-   fly secrets set ALLOWED_ORIGINS="https://revolta.top,https://revolta-ftvy.vercel.app"
+   fly secrets set ALLOWED_ORIGINS="https://revolta.top,https://apprevolta.vercel.app"
    fly secrets set LOG_LEVEL="info"
    
    # Ver logs
